@@ -23,6 +23,8 @@
         var input = [1, 2, 3, 4, 5];
         var result = _.contains(input, 4);
 
+
+
         /*
          * Mutation of inputs should be avoided without good justification otherwise
          * as it can often lead to hard to find bugs and confusing code!
@@ -56,9 +58,12 @@
       });
 
       it('should return false given an array and a value not in that array', function() {
+        var array = [4, 5, 6];
+        var value = 7;
+        expect( _.contains(array, value)).to.be.false;
         // Replace this line with an `expect` statement that tests
         // the behavior described by the `it` string
-        throw new Error('This test is missing.');
+        // throw new Error('This test is missing.');
       });
 
       it('should return true given a object and a value from that object', function() {
@@ -89,9 +94,10 @@
       });
 
       it('fails for a collection of all-falsy values', function() {
+        expect(_.every([false, null, undefined], _.identity)).to.be.false;
         // Replace this line with an `expect` statement that tests
         // the behavior described by the `it` string
-        throw new Error('This test is missing.');
+        // throw new Error('This test is missing.');
       });
 
       it('fails for a collection containing mixed falsy and truthy values', function() {
@@ -147,9 +153,10 @@
       });
 
       it('should fail for a set containing no matching values', function() {
+        expect(_.some([1, 3, 5, 7], isEven)).to.be.false;
         // Replace this line with an `expect` statement that tests
         // the behavior described by the `it` string
-        throw new Error('This test is missing.');
+        //throw new Error('This test is missing.');
       });
 
       it('should pass for a collection containing one matching value', function() {
@@ -187,9 +194,14 @@
       });
 
       it('should override properties found on the destination', function() {
+        var destination = {a: 4};
+        var source = {a: 7};
+        var extended = _.extend(destination, source);
+
+        expect(extended.a).to.equal(7);
         // Replace this line with an `expect` statement that tests
         // the behavior described by the `it` string
-        throw new Error('This test is missing.');
+        // throw new Error('This test is missing.');
       });
 
       it('should not override properties not found in the source', function() {
@@ -265,9 +277,15 @@
       });
 
       it('should copy any property whose key is not already set on the target', function() {
+        var destination = {a: 1, b: 2};
+        var source = {c: 3};
+
+        _.defaults(destination, source);
+
+        expect(destination.c).to.equal(3);
         // Replace this line with an `expect` statement that tests
         // the behavior described by the `it` string
-        throw new Error('This test is missing.');
+        //throw new Error('This test is missing.');
       });
 
       it('should not copy a property if that key is already set on the target', function() {
@@ -413,7 +431,7 @@
         memoSpy(10);
         expect(spy).to.have.been.calledOnce;
       });
-      
+
       it('should not run the memoized function twice when given a reference type as an argument', function() {
         // Be careful how you are checking if a set of arguments has been passed in already
         var spy = sinon.spy(function() { return 'Dummy output'; });
